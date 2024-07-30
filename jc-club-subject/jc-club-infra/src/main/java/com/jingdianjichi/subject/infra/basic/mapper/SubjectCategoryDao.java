@@ -1,4 +1,4 @@
-package com.jingdianjichi.subject.infra.basic.dao;
+package com.jingdianjichi.subject.infra.basic.mapper;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
 import org.apache.ibatis.annotations.Param;

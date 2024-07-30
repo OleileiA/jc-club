@@ -1,7 +1,7 @@
 package com.jingdianjichi.subject.infra.basic.service.impl;
 
 import com.jingdianjichi.subject.infra.basic.entity.SubjectCategory;
-import com.jingdianjichi.subject.infra.basic.dao.SubjectCategoryDao;
+import com.jingdianjichi.subject.infra.basic.mapper.SubjectCategoryDao;
 import com.jingdianjichi.subject.infra.basic.service.SubjectCategoryService;
 import org.springframework.stereotype.Service;
 
