@@ -3,11 +3,13 @@ server:
 spring:
   datasource:
     username: root
-    password: Wing1Q2W#E
+    password: ZjfCDRfbVgfajmvfq1iwWyM/OPOYsJLXF++kqy7KODIdCPdJgsKWKokEwuDB7GtHVrm3NRgdWZCRycmZ/cbwyg==
+#    password: Wing1Q2W#E
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://39.106.157.132:3306/jc-club?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&useSSL=true
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
+      connectionProperties: config.decrypt=true;config.decrypt.key=${publicKey};
       initial-size: 20
       min-idle: 20
       max-active: 100
@@ -22,5 +24,8 @@ spring:
           enabled: true
           slow-sql-millis: 2000
           log-slow-sql: true
-      wall:
-        enabled: true
+        wall:
+          enabled: true
+        config:
+          enabled: true
+publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgOyzfdycWQWBnbJf3ZfYfw7WRR8JxQURd7pOel2kTejo9umdEEBefItBrDZiiPHMXAVdRc9+OQrtrEJjmda60CAwEAAQ==
