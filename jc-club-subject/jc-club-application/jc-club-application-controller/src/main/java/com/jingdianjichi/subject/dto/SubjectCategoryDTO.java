@@ -1,18 +1,12 @@
-package com.jingdianjichi.subject.infra.basic.entity;
+package com.jingdianjichi.subject.dto;
 
 import lombok.Data;
 
-import java.util.Date;
 import java.io.Serializable;
+import java.util.Date;
 
-/**
- * 题目分类(SubjectCategory)实体类
- *
- * @author makejava
- * @since 2024-07-22 18:30:48
- */
 @Data
-public class SubjectCategory implements Serializable {
+public class SubjectCategoryDTO implements Serializable {
 
     /**
      * 主键
@@ -64,4 +58,3 @@ public class SubjectCategory implements Serializable {
      */
     private Integer isDeleted;
 }
-
