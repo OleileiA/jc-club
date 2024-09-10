@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 刷题分类
@@ -26,6 +27,9 @@ public class SubjectCategoryController {
     @Resource
     private SubjectCategoryDomainService subjectCategoryDomainService;
 
+    /*
+    * 增加分类
+    * */
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO dto) {
 
@@ -45,6 +49,33 @@ public class SubjectCategoryController {
             return Result.ok(true);
         } catch (Exception e) {
             log.error("SubjectCategoryController.add.error:{}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    /*
+    * 查询分类列表
+    * */
+    @PostMapping("/queryPrimaryCategory")
+    public Result<SubjectCategoryDTO> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+
+        try {
+
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.queryPrimaryCategory.dto: {}", JSON.toJSONString(subjectCategoryDTO));
+            }
+
+            Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "parentId不能为空");
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(subjectCategoryDTO);
+
+            List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
+
+            List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convertBOListToDTOList(subjectCategoryBOList);
+
+            return Result.ok(subjectCategoryDTOList);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage(), e);
             return Result.fail(e.getMessage());
         }
     }
