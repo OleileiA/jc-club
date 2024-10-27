@@ -54,6 +54,28 @@ public class SubjectCategoryController {
     }
 
     /*
+    * 更新
+    * */
+    @PostMapping("/update")
+    public Result<Boolean> update(@RequestBody SubjectCategoryDTO dto) {
+
+        try {
+            if (log.isInfoEnabled()) {
+                log.info("SubjectCategoryController.update.dto: {}", JSON.toJSONString(dto));
+            }
+
+            Preconditions.checkNotNull(dto.getId(), "id不能为空");
+
+            SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(dto);
+            subjectCategoryDomainService.update(subjectCategoryBO);
+            return Result.ok(true);
+        } catch (Exception e) {
+            log.error("SubjectCategoryController.update.error:{}", e.getMessage(), e);
+            return Result.fail(e.getMessage());
+        }
+    }
+
+    /*
     * 查询分类列表
     * */
     @PostMapping("/queryPrimaryCategory")

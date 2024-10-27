@@ -30,6 +30,15 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     }
 
     @Override
+    public void update(SubjectCategoryBO subjectCategoryBO) {
+        if (log.isInfoEnabled()) {
+            log.info("SubjectCategoryDomainService.update.bo: {}", JSON.toJSONString(subjectCategoryBO));
+        }
+        SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOToCategory(subjectCategoryBO);
+        subjectCategoryService.update(subjectCategory);
+    }
+
+    @Override
     public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO bo) {
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOToCategory(bo);
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
