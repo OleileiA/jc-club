@@ -8,6 +8,7 @@ import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
 import com.jingdianjichi.subject.domain.service.SubjectCategoryDomainService;
 import com.jingdianjichi.subject.dto.SubjectCategoryDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,6 @@ public class SubjectCategoryController {
     * */
     @PostMapping("/add")
     public Result<Boolean> add(@RequestBody SubjectCategoryDTO dto) {
-
         try {
             // log.isInfoEnabled() 用于检查是否需要执行 log.info() 方法。这样做的好处是，只有在 INFO 级别的日志启用时，才会进行消息的生成和拼接
             // 从而避免了在日志级别不启用的情况下执行不必要的计算。
@@ -41,8 +41,9 @@ public class SubjectCategoryController {
             }
 
             // 参数的校验
-            Preconditions.checkNotNull(dto.getCategoryName(), "分类名字不能为空");
+            Preconditions.checkArgument(!StringUtils.isBlank(dto.getCategoryName()), "分类名字不能为空");
             Preconditions.checkNotNull(dto.getCategoryType(), "分类类型不能为空");
+            Preconditions.checkNotNull(dto.getParentId(), "父级id不能为空");
 
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(dto);
             subjectCategoryDomainService.add(subjectCategoryBO);
