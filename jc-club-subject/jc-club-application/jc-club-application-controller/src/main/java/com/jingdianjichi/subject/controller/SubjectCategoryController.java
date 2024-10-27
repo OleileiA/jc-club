@@ -57,7 +57,7 @@ public class SubjectCategoryController {
     * 查询分类列表
     * */
     @PostMapping("/queryPrimaryCategory")
-    public Result<SubjectCategoryDTO> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
+    public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
 
         try {
 
