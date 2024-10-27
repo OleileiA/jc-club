@@ -104,7 +104,6 @@ public class SubjectCategoryController {
     * */
     @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
-
         try {
 
             if (log.isInfoEnabled()) {

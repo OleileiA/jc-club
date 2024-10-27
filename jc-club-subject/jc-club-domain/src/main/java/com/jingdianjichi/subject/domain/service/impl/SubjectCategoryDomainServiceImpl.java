@@ -1,6 +1,7 @@
 package com.jingdianjichi.subject.domain.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.jingdianjichi.subject.common.enums.CategoryCodeEnum;
 import com.jingdianjichi.subject.common.enums.IsDeletedCodeEnum;
 import com.jingdianjichi.subject.domain.convert.SubjectCategoryConverter;
 import com.jingdianjichi.subject.domain.entity.SubjectCategoryBO;
@@ -52,6 +53,7 @@ public class SubjectCategoryDomainServiceImpl implements SubjectCategoryDomainSe
     @Override
     public List<SubjectCategoryBO> queryCategory(SubjectCategoryBO bo) {
         SubjectCategory subjectCategory = SubjectCategoryConverter.INSTANCE.convertBOToCategory(bo);
+        subjectCategory.setIsDeleted(IsDeletedCodeEnum.NOT_DELETED.getCode());
         List<SubjectCategory> subjectCategoryList = subjectCategoryService.queryCategory(subjectCategory);
         List<SubjectCategoryBO> subjectCategoryBOList = SubjectCategoryConverter.INSTANCE.convertCategoryToBOList(subjectCategoryList);
         if (log.isInfoEnabled()) {
