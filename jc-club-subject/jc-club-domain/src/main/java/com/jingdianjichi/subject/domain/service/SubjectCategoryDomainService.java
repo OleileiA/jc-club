@@ -10,5 +10,7 @@ public interface SubjectCategoryDomainService {
 
     void update(SubjectCategoryBO subjectCategoryBO);
 
+    void delete(SubjectCategoryBO subjectCategoryBO);
+
     List<SubjectCategoryBO> queryCategory(SubjectCategoryBO subjectCategoryBO);
 }
