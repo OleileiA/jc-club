@@ -39,12 +39,10 @@ public class SubjectCategoryController {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.add.dto: {}", JSON.toJSONString(dto));
             }
-
             // 参数的校验
             Preconditions.checkArgument(!StringUtils.isBlank(dto.getCategoryName()), "分类名字不能为空");
             Preconditions.checkNotNull(dto.getCategoryType(), "分类类型不能为空");
             Preconditions.checkNotNull(dto.getParentId(), "父级id不能为空");
-
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(dto);
             subjectCategoryDomainService.add(subjectCategoryBO);
             return Result.ok(true);
@@ -59,14 +57,11 @@ public class SubjectCategoryController {
     * */
     @PostMapping("/update")
     public Result<Boolean> update(@RequestBody SubjectCategoryDTO dto) {
-
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.update.dto: {}", JSON.toJSONString(dto));
             }
-
             Preconditions.checkNotNull(dto.getId(), "id不能为空");
-
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(dto);
             subjectCategoryDomainService.update(subjectCategoryBO);
             return Result.ok(true);
@@ -81,16 +76,12 @@ public class SubjectCategoryController {
     * */
     @PostMapping("/delete")
     public Result<Boolean> delete(@RequestBody SubjectCategoryDTO dto) {
-
         try {
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.delete.dto: {}", JSON.toJSONString(dto));
             }
-
             Preconditions.checkNotNull(dto.getId(), "id不能为空");
-
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(dto);
-
             subjectCategoryDomainService.delete(subjectCategoryBO);
             return Result.ok(true);
         } catch (Exception e) {
@@ -105,19 +96,13 @@ public class SubjectCategoryController {
     @PostMapping("/queryPrimaryCategory")
     public Result<List<SubjectCategoryDTO>> queryPrimaryCategory(@RequestBody SubjectCategoryDTO subjectCategoryDTO) {
         try {
-
             if (log.isInfoEnabled()) {
                 log.info("SubjectCategoryController.queryPrimaryCategory.dto: {}", JSON.toJSONString(subjectCategoryDTO));
             }
-
             Preconditions.checkNotNull(subjectCategoryDTO.getParentId(), "parentId不能为空");
-
             SubjectCategoryBO subjectCategoryBO = SubjectCategoryDTOConverter.INSTANCE.convertDTOToBoCategory(subjectCategoryDTO);
-
             List<SubjectCategoryBO> subjectCategoryBOList = subjectCategoryDomainService.queryCategory(subjectCategoryBO);
-
             List<SubjectCategoryDTO> subjectCategoryDTOList = SubjectCategoryDTOConverter.INSTANCE.convertBOListToDTOList(subjectCategoryBOList);
-
             return Result.ok(subjectCategoryDTOList);
         } catch (Exception e) {
             log.error("SubjectCategoryController.queryPrimaryCategory.error:{}", e.getMessage(), e);
