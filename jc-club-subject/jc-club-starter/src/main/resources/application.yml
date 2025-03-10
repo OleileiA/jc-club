@@ -29,3 +29,5 @@ spring:
         config:
           enabled: true
 publicKey: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAKgOyzfdycWQWBnbJf3ZfYfw7WRR8JxQURd7pOel2kTejo9umdEEBefItBrDZiiPHMXAVdRc9+OQrtrEJjmda60CAwEAAQ==
+logging:
+  config: classpath:log4j2-spring.xml
